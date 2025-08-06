@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UpdateCategory</title>
+</head>
+<body>
+    <%-include("nav.ejs")%>
+    <form action="/saveupdatecate" method="post">
+    <div class="container w-50">
+        <h2 class="text-center"> Update Category</h2>
+        <div class="form-group">
+             <input type="hidden" name="cid" id="" value="<%=upcategory[0].cid%>" class="form-control">
+             <input type="text" name="name" id="" value="<%=upcategory[0].name%>" class="form-control">
+
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Update Category" class="form-control">
+        </div>
+    </div>
+    </form>
+</body>
+</html>

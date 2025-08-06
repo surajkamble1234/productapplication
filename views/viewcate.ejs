@@ -7,6 +7,10 @@
 </head>
 <body>
      <%-include("nav.ejs")%>
+     <div class="form-group">
+      <input type="text" name="search" value="" class="form-control"
+       placeholder="Search Category..." onkeyup="ajaxsearch(this.value)">
+     </div>
      <table class="table table-striped">
         <thead>
               <tr>
@@ -16,7 +20,7 @@
                 <th>delete</th>
               </tr>
         </thead>
-        <tbody>
+        <tbody id="tblbody">
              
                <% if(viewcate.length>0){ 
                    viewcate.forEach((item,index)=>{
@@ -24,8 +28,8 @@
                  <tr>
                  <td><%=(index+1)%></td>
                  <td><%=item.name%></td>
-                 <td><a href="">update</a></td>
-                 <td><a href="">delete</a></td>
+                 <td><a href="/updatecate?id=<%=item.cid%>">update</a></td>
+                 <td><a href="/deletecate?id=<%=item.cid%>">delete</a></td>
                  </tr>
                 <%  })
                 }else{ %>
@@ -36,8 +40,10 @@
                 <%  
                    }
                 %>
-          
+
         </tbody>
      </table>
+
+     <script src="ajax.js"></script>
 </body>
 </html>
