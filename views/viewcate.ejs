@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Category</title>
+</head>
+<body>
+     <%-include("nav.ejs")%>
+     <table class="table table-striped">
+        <thead>
+              <tr>
+                <th>SR.NO</th>
+                <th>Category Name</th>
+                <th>update</th>
+                <th>delete</th>
+              </tr>
+        </thead>
+        <tbody>
+             
+               <% if(viewcate.length>0){ 
+                   viewcate.forEach((item,index)=>{
+                %>
+                 <tr>
+                 <td><%=(index+1)%></td>
+                 <td><%=item.name%></td>
+                 <td><a href="">update</a></td>
+                 <td><a href="">delete</a></td>
+                 </tr>
+                <%  })
+                }else{ %>
+                  <tr>
+                    <td colspan="4">not record found</td>
+                  </tr>
+                  
+                <%  
+                   }
+                %>
+          
+        </tbody>
+     </table>
+</body>
+</html>
