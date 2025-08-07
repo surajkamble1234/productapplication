@@ -1,16 +1,22 @@
 let adminmodel=require("../models/adminmodel.js");
 
+//nav
 exports.displaynav=((req,res)=>{
-    res.render("nav.ejs");
+    res.render("home.ejs");
 })
 
+//home
+exports.homepage=((req,res)=>{
+    res.render("home.ejs");
+})
+
+//category
 exports.addcategory=((req,res)=>{
     res.render("Addcate.ejs",{msg:""});
 })
 
 exports.savecategory=((req,res)=>{
     let {name}=req.body;
-    console.log(name)
     let savecat=adminmodel.savecate(name);
         savecat.then((re)=>{
          res.render("Addcate.ejs",{msg:"category saved successfully..."})
@@ -86,3 +92,96 @@ exports.searchcategory=((req,res)=>{
             console.log(err);
         })
 })
+
+//product
+exports.addproduct=((req,res)=>{
+    let getcate=adminmodel.getcategory();
+     getcate.then((getcate)=>{
+      res.render("Addproduct.ejs",{getca:getcate,msg:""});
+     }).catch((err)=>{
+        console.log(err);
+     })
+   
+})
+
+exports.saveproduct=((req,res)=>{
+ let {pname,cid}=req.body;
+ let saveprod=adminmodel.saveproduct(pname,cid);
+     saveprod.then((savepro)=>{
+     let getcate=adminmodel.getcategory();
+     getcate.then((getcate)=>{
+      res.render("Addproduct.ejs",{getca:getcate,msg:"Product saved successfully..."});
+     }).catch((err)=>{
+        console.log(err);
+     })
+   
+     }).catch((err)=>{
+        console.log(err);
+     })
+});
+
+exports.viewproduct=((req,res)=>{
+   let viewpro=adminmodel.viewprod();
+       viewpro.then((viewprod)=>{
+       res.render("ViewProduct.ejs",{viewpro:viewprod});
+       }).catch((err)=>{
+        console.log(err);
+       })
+})
+
+exports.updateprod=((req,res)=>{
+    let updatecatepro=adminmodel.getupcateprod();
+    let pid=req.query.pid;
+    let getproduct=adminmodel.getproduct(pid);
+        getproduct.then((productupdate)=>{
+          updatecatepro.then((upprodcate)=>{
+         res.render("updateproduct.ejs",{updatecate:upprodcate,prod:productupdate});
+        }).catch((err)=>{
+            console.log(err);
+        })
+        }).catch((err)=>{
+            console.log(err);
+        })
+       
+})
+
+exports.finalupdateprod=((req,res)=>{
+    let {pname,cid,pid}=req.body;
+    let finalupproduct=adminmodel.finalupdateproduct(pname,cid,pid);
+        finalupproduct.then((finalproduct)=>{
+        let viewpro=adminmodel.viewprod();
+            viewpro.then((viewprod)=>{
+            res.render("ViewProduct.ejs",{viewpro:viewprod});
+       }).catch((err)=>{
+        console.log(err);
+       })
+        }).catch((err)=>{
+            console.log(err);
+        })
+
+})
+
+exports.deleteproduct=((req,res)=>{
+     let pid=req.query.pid;
+     let delprod=adminmodel.deleteproduct(pid);
+         delprod.then((re)=>{
+          let viewpro=adminmodel.viewprod();
+          viewpro.then((viewprod)=>{
+          res.render("ViewProduct.ejs",{viewpro:viewprod});
+          }).catch((err)=>{
+          console.log(err);
+          })
+         }).catch((err)=>{
+            console.log(err);
+         })
+})
+
+exports.searchproduct=((req,res)=>{
+    let name=req.query.name;
+    let searchob=adminmodel.searchpro(name);
+        searchob.then((re)=>{
+        res.send(re);
+        }).catch((err)=>{
+            console.log(err);
+        })
+});

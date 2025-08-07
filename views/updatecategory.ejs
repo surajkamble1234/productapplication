@@ -5,11 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UpdateCategory</title>
 </head>
+<style>
+    body {
+    background: linear-gradient(to right, #f3eadf,  #f3ede4);
+
+    }
+    .form-container {
+      min-height: 250px;
+      margin-top: 80px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 30px;
+    }
+
+</style>
 <body>
     <%-include("nav.ejs")%>
     <form action="/saveupdatecate" method="post">
-    <div class="container w-50">
-        <h2 class="text-center"> Update Category</h2>
+    <div class="container form-container w-50  ">
+        <h2 class="text-center text-primary"> Update Category</h2>
         <div class="form-group">
              <input type="hidden" name="cid" id="" value="<%=upcategory[0].cid%>" class="form-control">
              <input type="text" name="name" id="" value="<%=upcategory[0].name%>" class="form-control">
@@ -17,7 +31,7 @@
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Update Category" class="form-control">
+            <input type="submit "  value="Update Category" class="form-control text-center bg-primary text-white ">
         </div>
     </div>
     </form>
